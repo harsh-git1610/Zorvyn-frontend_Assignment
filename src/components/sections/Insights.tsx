@@ -5,6 +5,8 @@ import CategorySpendingList from '../charts/CategorySpendingList';
 import WeekdayHeatmap from '../charts/WeekdayHeatmap';
 import { generateInsights, type KPI, type ContextualInsight } from '../../utils/insightCalculators';
 
+import SummaryCard from '../ui/SummaryCard';
+
 // Helper to map insight icon names to SVG paths
 const INSIGHT_ICONS: Record<string, string> = {
   'arrow-down': 'M19 14l-7 7m0 0l-7-7m7 7V3',
@@ -23,22 +25,6 @@ function InsightIcon(props: { icon: string; className?: string }) {
         <path strokeLinecap="round" strokeLinejoin="round" d={path} />
       </svg>
     </div>
-  );
-}
-
-function renderBadge(badge?: KPI['badge']) {
-  if (!badge) return null;
-  const colors = {
-    success: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300',
-    danger: 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300',
-    info: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
-    warning: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300',
-    neutral: 'bg-surface-100 text-surface-700 dark:bg-surface-800 dark:text-surface-300',
-  };
-  return (
-    <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${colors[badge.type]}`}>
-      {badge.text}
-    </span>
   );
 }
 
@@ -94,56 +80,67 @@ export default function Insights() {
         </div>
       </div>
 
-      {/* KPI Cards Row (Top 3) */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {kpis.slice(0, 3).map(kpi => {
+      {/* KPI Cards (All 5) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+        {kpis.map((kpi, idx) => {
+          let dotColor = 'bg-green-500';
           let valueColor = 'text-green-500';
-          let iconColor = 'text-green-600';
-          if (kpi.id === 'top-cat') { valueColor = 'text-blue-500'; iconColor = 'text-blue-600'; }
-          if (kpi.id === 'pending') { valueColor = 'text-amber-500'; iconColor = 'text-amber-700'; }
+          let rightColor = 'text-green-500';
+          let rightText = kpi.badge?.text || '';
+          let leftText = 'vs last month'; // default generic mock
           
-          return (
-            <div key={kpi.id} className="card p-5 bg-white border-surface-200 text-surface-900 dark:bg-surface-900 dark:border-surface-800 dark:text-white flex items-start gap-4 h-full">
-              <InsightIcon icon={kpi.icon} className={`bg-white ${iconColor}`} />
-              <div className="flex-1 w-full">
-                <div className="flex flex-col items-start gap-1 mb-1">
-                  <span className="text-[10px] font-bold tracking-wider text-surface-400 uppercase">{kpi.title}</span>
-                  {renderBadge(kpi.badge)}
-                </div>
-                <div className={`text-2xl font-normal mb-1 mt-1 ${valueColor}`}>{kpi.value}</div>
-                <div className="text-xs text-surface-400">{kpi.description}</div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+          if (kpi.id === 'top-cat') { 
+            dotColor = 'bg-blue-500'; 
+            valueColor = 'text-surface-900 dark:text-white'; 
+            rightColor = 'text-blue-500';
+            leftText = `${kpi.badge?.text} · 81%`;
+            rightText = 'This month';
+          }
+          if (kpi.id === 'pending') { 
+            dotColor = 'bg-amber-500'; 
+            valueColor = 'text-surface-900 dark:text-white';
+            rightColor = 'text-amber-500';
+            leftText = kpi.badge?.text || '';
+            rightText = 'Processing';
+          }
+          if (kpi.id === 'biggest') {
+            dotColor = 'bg-rose-500';
+            valueColor = 'text-surface-900 dark:text-white';
+            rightColor = 'text-rose-500';
+            leftText = kpi.badge?.text || '';
+            rightText = 'This month';
+          }
+          if (kpi.id === 'active-day') {
+            dotColor = 'bg-indigo-500';
+            valueColor = 'text-surface-900 dark:text-white';
+            rightColor = 'text-indigo-500';
+            leftText = kpi.badge?.text || '';
+            rightText = 'Avg usage';
+          }
 
-      {/* KPI Cards Row (Bottom 2) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
-        {kpis.slice(3, 5).map(kpi => {
-          let valueColor = 'text-rose-500';
-          let iconColor = 'text-rose-600';
-          if (kpi.id === 'active-day') { valueColor = 'text-indigo-500'; iconColor = 'text-indigo-600'; }
-          
+          if (kpi.id === 'savings' && kpi.badge) {
+            rightText = kpi.badge.text;
+            rightColor = kpi.badge.type === 'success' ? 'text-green-500' : 'text-rose-500';
+          }
+
           return (
-            <div key={kpi.id} className="card p-5 bg-white border-surface-200 text-surface-900 dark:bg-surface-900 dark:border-surface-800 dark:text-white flex items-start gap-4">
-              <InsightIcon icon={kpi.icon} className={`bg-white ${iconColor}`} />
-              <div className="flex-1 w-full">
-                <div className="flex flex-col items-start gap-1 mb-1">
-                  <span className="text-[10px] font-bold tracking-wider text-surface-400 uppercase">{kpi.title}</span>
-                  {renderBadge(kpi.badge)}
-                </div>
-                <div className={`text-2xl font-normal mb-1 mt-1 ${valueColor}`}>{kpi.value}</div>
-                <div className="text-xs text-surface-400">{kpi.description}</div>
-              </div>
-            </div>
+            <SummaryCard
+              key={kpi.id}
+              title={kpi.title}
+              value={kpi.value.replace(/[^0-9.₹%-]/g, '')} // Clean up value to only have specific characters if needed
+              valueColorClass={valueColor}
+              dotColorClass={dotColor}
+              bottomLeftText={leftText}
+              bottomRightText={rightText}
+              bottomRightColorClass={rightColor}
+            />
           );
         })}
       </div>
 
       {/* Middle Section: Monthly Comparison & Category list */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div className="card bg-white border-surface-200 text-surface-900 dark:bg-surface-900 dark:border-surface-800 dark:text-white">
+        <div className="card bg-white text-surface-900 dark:bg-surface-900 dark:text-white">
            <MonthlyComparisonChart />
         </div>
         <CategorySpendingList filter={timeFilter} />
@@ -159,7 +156,7 @@ export default function Insights() {
           if (idx === 1) iconClasses = 'bg-orange-50 text-orange-700';
           if (idx === 2) iconClasses = 'bg-blue-50 text-blue-700';
           return (
-            <div key={s.id} className="card p-4 bg-white border-surface-200 text-surface-900 dark:bg-surface-900 dark:border-surface-800 dark:text-white flex items-start gap-3">
+            <div key={s.id} className="card p-4 bg-white text-surface-900 dark:bg-surface-900 dark:text-white flex items-start gap-3">
               <InsightIcon icon={s.icon} className={`shrink-0 mt-0.5 ${iconClasses}`} />
               <p className="text-sm text-surface-600 dark:text-surface-300 leading-relaxed font-light">
                 {parseText(s.text)}

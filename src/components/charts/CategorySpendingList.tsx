@@ -56,7 +56,7 @@ export default function CategorySpendingList({ filter }: CategorySpendingListPro
   };
 
   return (
-    <div className="card p-4 lg:p-5 flex flex-col h-full bg-white text-surface-900 border-surface-200 dark:bg-surface-900 dark:border-surface-800 dark:text-white">
+    <div className="card p-4 lg:p-5 flex flex-col h-full bg-white text-surface-900 dark:bg-surface-900 dark:text-white">
       <div className="mb-6">
         <h3 className="text-base font-semibold">Spending by category</h3>
         <p className="text-xs text-surface-500 dark:text-surface-400 mt-0.5">Breakdown for selected period</p>

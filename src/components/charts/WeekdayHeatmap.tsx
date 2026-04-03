@@ -11,7 +11,7 @@ export default function WeekdayHeatmap() {
   const topDayData = [...data].sort((a,b) => b.avgSpend - a.avgSpend)[0];
 
   return (
-    <div className="card p-4 lg:p-5 h-full bg-white text-surface-900 border-surface-200 dark:bg-surface-900 dark:border-surface-800 dark:text-white">
+    <div className="card p-4 lg:p-5 h-full bg-white text-surface-900 dark:bg-surface-900 dark:text-white">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-3">
         <div>
           <h3 className="text-base font-semibold">Spending by day of week</h3>
@@ -30,10 +30,10 @@ export default function WeekdayHeatmap() {
           return (
             <div
               key={d.day}
-              className={`rounded-xl p-3 text-center transition-colors cursor-default min-w-[70px] flex-1 flex flex-col items-center justify-between border border-transparent ${
+              className={`rounded-xl p-3 text-center transition-colors cursor-default min-w-[70px] flex-1 flex flex-col items-center justify-between ${
                 isHighest 
                   ? 'bg-blue-600 dark:bg-blue-600 shadow-md transform -translate-y-1' 
-                  : 'bg-surface-50 border-surface-200 dark:border-transparent dark:bg-surface-800/80 hover:bg-surface-100 dark:hover:bg-surface-700'
+                  : 'bg-surface-50 dark:bg-surface-800/80 hover:bg-surface-100 dark:hover:bg-surface-700'
               }`}
             >
               <p className={`text-xs font-medium mb-2 ${isHighest ? 'text-blue-50' : 'text-surface-500 dark:text-surface-300'}`}>{d.day}</p>

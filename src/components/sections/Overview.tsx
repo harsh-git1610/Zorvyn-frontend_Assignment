@@ -10,7 +10,7 @@ import { formatDate } from '../../utils/dateHelpers';
 
 export default function Overview() {
   const {
-    state, monthlySummary,
+    state, dispatch, monthlySummary,
     currentMonthIncome, currentMonthExpenses,
     lastMonthIncome, lastMonthExpenses
   } = useApp();
@@ -83,32 +83,30 @@ export default function Overview() {
           title="Total Balance"
           value={totalBalance}
           change={balanceChange}
-          color="blue"
-          
-          icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>}
+          dotColorClass="bg-blue-500"
+          valueColorClass="text-surface-900 dark:text-white"
         />
         <SummaryCard
           title="Total Income"
           value={currentMonthIncome}
           change={incomeChange}
-          color="green"   
-          icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11l5-5m0 0l5 5m-5-5v12" /></svg>}
+          dotColorClass="bg-emerald-500"
+          valueColorClass="text-surface-900 dark:text-white"
         />
         <SummaryCard
           title="Total Expenses"
           value={currentMonthExpenses}
           change={expenseChange}
-          color="red"
-          
-          icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 13l-5 5m0 0l-5-5m5 5V6" /></svg>}
+          dotColorClass="bg-rose-500"
+          valueColorClass="text-surface-900 dark:text-white"
         />
         <SummaryCard
           title="Savings Rate"
           value={savingsRate}
           change={savingsRateChange}
-          color="purple"
+          dotColorClass="bg-purple-500"
+          valueColorClass="text-surface-900 dark:text-white"
           isPercentage
-          icon={<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>}
         />
       </div>
 
@@ -122,9 +120,16 @@ export default function Overview() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Recent Transactions */}
         <div className="lg:col-span-2 card">
-          <div className="px-5 py-4 border-b border-surface-100 dark:border-surface-800">
+          <div className="px-5 py-4 border-b border-surface-100 dark:border-surface-800 flex justify-between items-center">
             <h3 className="text-sm font-semibold text-surface-900 dark:text-white">Recent Transactions</h3>
+            <button
+              onClick={() => dispatch({ type: 'SET_SECTION', payload: 'transactions' })}
+              className="text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+            >
+              View all →
+            </button>
           </div>
+
           <div className="divide-y divide-surface-100 dark:divide-surface-800">
             {recentTransactions.map(tx => {
               return (

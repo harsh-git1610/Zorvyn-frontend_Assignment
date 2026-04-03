@@ -13,7 +13,7 @@ export default function Navbar() {
           </div>
           <div className="hidden sm:block">
             <h1 className="text-lg font-bold text-surface-900 dark:text-white">
-              Zorvyn Finance
+              Finance Dashboard
             </h1>
           </div>
         </div>
