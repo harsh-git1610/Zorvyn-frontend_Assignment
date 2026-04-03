@@ -1,4 +1,4 @@
-# Zorvyn Finance Dashboard
+# Finance Dashboard
 
 A modern, feature-rich Finance Dashboard single-page application built with React, Tailwind CSS, and Recharts. Track your finances, manage budgets, and achieve savings goals — all with a beautiful, responsive UI.
 
