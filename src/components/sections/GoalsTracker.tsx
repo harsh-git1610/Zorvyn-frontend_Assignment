@@ -152,7 +152,7 @@ export default function GoalsTracker() {
                   </div>
                   <div className="w-full bg-surface-200 dark:bg-surface-700 rounded-full h-2">
                     <div
-                      className="bg-gradient-to-r from-primary-500 to-accent-500 rounded-full h-2 transition-all duration-500"
+                      className="bg-primary-600 dark:bg-primary-500 rounded-full h-2 transition-all duration-500"
                       style={{ width: `${Math.min(percentage, 100)}%` }}
                     />
                   </div>

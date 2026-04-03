@@ -8,11 +8,11 @@ export default function Navbar() {
       <div className="flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/25">
-            <span className="text-white font-bold text-lg">Z</span>
+          <div className="w-9 h-9 bg-surface-900 dark:bg-white rounded-xl flex items-center justify-center shadow-sm">
+            <span className="text-white dark:text-surface-900 font-bold text-lg">Z</span>
           </div>
           <div className="hidden sm:block">
-            <h1 className="text-lg font-bold bg-gradient-to-r from-primary-600 to-accent-500 bg-clip-text text-transparent">
+            <h1 className="text-lg font-bold text-surface-900 dark:text-white">
               Zorvyn Finance
             </h1>
           </div>
