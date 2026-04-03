@@ -176,12 +176,4 @@ All amounts are formatted in **Indian Rupees (₹)** using the Indian number sys
 
 ---
 
-## 📸 Screenshots
 
-*Screenshots will be added here*
-
----
-
-## 📄 License
-
-This project is for educational/demonstration purposes.
