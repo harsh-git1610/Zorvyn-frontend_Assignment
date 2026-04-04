@@ -46,9 +46,6 @@ export default function Sidebar() {
             );
           })}
         </nav>
-        <div className="p-4 mt-auto border-t border-surface-200 dark:border-surface-700/50 hidden lg:flex justify-center items-center">
-          
-        </div>
       </aside>
 
       {/* Mobile Bottom Tab Bar */}
