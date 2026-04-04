@@ -26,7 +26,7 @@ export function generateInsights(transactions: Transaction[]) {
   const kpis: KPI[] = [];
   const suggestions: ContextualInsight[] = [];
   
-  const now = new Date();
+
   const months = getLast6Months();
   const currentMonth = months[months.length - 1];
   const lastMonth = months[months.length - 2];

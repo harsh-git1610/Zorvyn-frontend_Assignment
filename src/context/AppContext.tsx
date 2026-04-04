@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer, useEffect, useMemo, useCallback, type ReactNode } from 'react';
 import { generateMockTransactions } from '../data/mockTransactions';
 import { isInMonth, getLast6Months, formatMonthShort } from '../utils/dateHelpers';
-import { parseISO } from 'date-fns';
+
 
 // ─── Types ───────────────────────────────────────────────────
 

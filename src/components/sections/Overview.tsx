@@ -10,7 +10,7 @@ import { formatDate } from '../../utils/dateHelpers';
 
 export default function Overview() {
   const {
-    state, dispatch, monthlySummary,
+    state, dispatch,
     currentMonthIncome, currentMonthExpenses,
     lastMonthIncome, lastMonthExpenses
   } = useApp();
@@ -21,8 +21,6 @@ export default function Overview() {
       .reduce((sum, t) => sum + (t.type === 'income' ? t.amount : -t.amount), 0);
   }, [state.transactions]);
 
-  const totalIncome = useMemo(() => state.transactions.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0), [state.transactions]);
-  const totalExpenses = useMemo(() => state.transactions.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0), [state.transactions]);
 
   // Percentage changes
   const incomeChange = lastMonthIncome > 0 ? ((currentMonthIncome - lastMonthIncome) / lastMonthIncome) * 100 : 0;
@@ -32,10 +30,7 @@ export default function Overview() {
   const lastSavingsRate = lastMonthIncome > 0 ? ((lastMonthIncome - lastMonthExpenses) / lastMonthIncome) * 100 : 0;
   const savingsRateChange = savingsRate - lastSavingsRate;
 
-  // Sparkline data from monthly summary
-  const incomeSparkline = monthlySummary.map(m => m.income);
-  const expenseSparkline = monthlySummary.map(m => m.expense);
-  const netSparkline = monthlySummary.map(m => m.net);
+
 
   // Recent 5 transactions
   const recentTransactions = useMemo(() => {

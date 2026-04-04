@@ -3,7 +3,7 @@ import { useApp } from '../../context/AppContext';
 import MonthlyComparisonChart from '../charts/MonthlyComparisonChart';
 import CategorySpendingList from '../charts/CategorySpendingList';
 import WeekdayHeatmap from '../charts/WeekdayHeatmap';
-import { generateInsights, type KPI, type ContextualInsight } from '../../utils/insightCalculators';
+import { generateInsights } from '../../utils/insightCalculators';
 
 import SummaryCard from '../ui/SummaryCard';
 
@@ -82,7 +82,7 @@ export default function Insights() {
 
       {/* KPI Cards (All 5) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-        {kpis.map((kpi, idx) => {
+        {kpis.map((kpi) => {
           let dotColor = 'bg-green-500';
           let valueColor = 'text-green-500';
           let rightColor = 'text-green-500';

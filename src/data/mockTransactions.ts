@@ -1,5 +1,5 @@
 import type { Transaction } from '../context/AppContext';
-import { subMonths, subDays, format } from 'date-fns';
+import { subMonths, format } from 'date-fns';
 
 function uuid(): string {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
