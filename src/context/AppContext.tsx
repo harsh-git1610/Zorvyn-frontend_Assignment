@@ -143,7 +143,7 @@ function createInitialState(): AppState {
         createdAt: '2026-03-01',
       },
     ]),
-    darkMode: loadFromStorage<boolean>('zorvyn_darkMode', false),
+    darkMode: loadFromStorage<boolean>('zorvyn_darkMode', true),
     activeSection: 'overview',
     toasts: [],
   };
