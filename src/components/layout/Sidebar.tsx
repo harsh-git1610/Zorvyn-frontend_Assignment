@@ -47,9 +47,7 @@ export default function Sidebar() {
           })}
         </nav>
         <div className="p-4 mt-auto border-t border-surface-200 dark:border-surface-700/50 hidden lg:flex justify-center items-center">
-          <p className="text-[11px] text-surface-400 dark:text-surface-500 font-medium tracking-wide">
-            Made by - Harsh Chauhan
-          </p>
+          
         </div>
       </aside>
 
