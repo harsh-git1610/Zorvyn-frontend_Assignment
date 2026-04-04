@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { Transaction } from '../../context/AppContext';
-import { ALL_CATEGORIES, EXPENSE_CATEGORIES, INCOME_CATEGORIES, PAYMENT_METHODS, STATUSES } from '../../data/categories';
+import { EXPENSE_CATEGORIES, INCOME_CATEGORIES, PAYMENT_METHODS, STATUSES } from '../../data/categories';
 
 interface TransactionFormProps {
   transaction?: Transaction; // if editing
@@ -155,7 +155,7 @@ export default function TransactionForm({ transaction, onSubmit, onCancel }: Tra
           <label className={labelClass}>Status</label>
           <select
             value={status}
-            onChange={e => setStatus(e.target.value)}
+            onChange={e => setStatus(e.target.value as Transaction['status'])}
             className={inputClass}
           >
             {STATUSES.map(s => (

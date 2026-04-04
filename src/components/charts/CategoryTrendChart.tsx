@@ -74,7 +74,7 @@ export default function CategoryTrendChart() {
               borderRadius: '12px',
               boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
             }}
-            formatter={(value: number) => [formatCompactCurrency(value), '']}
+            formatter={(value: any) => [formatCompactCurrency(Number(value)), '']}
           />
           {EXPENSE_CATEGORIES.filter(cat => visibleCategories.has(cat)).map(cat => (
             <Line

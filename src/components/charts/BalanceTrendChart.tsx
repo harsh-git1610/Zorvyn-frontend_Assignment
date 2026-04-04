@@ -30,7 +30,7 @@ export default function BalanceTrendChart() {
               borderRadius: '12px',
               boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
             }}
-            formatter={(value: number) => [formatCompactCurrency(value), '']}
+            formatter={(value: any) => [formatCompactCurrency(Number(value)), '']}
           />
           <Legend iconSize={10} wrapperStyle={{ paddingTop: '8px', fontSize: '12px' }} />
           <Area type="monotone" dataKey="income" name="Income" stroke="#10b981" strokeWidth={2} fill="url(#incomeGrad)" />

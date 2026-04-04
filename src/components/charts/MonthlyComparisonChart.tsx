@@ -20,7 +20,7 @@ export default function MonthlyComparisonChart() {
               borderRadius: '12px',
               boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
             }}
-            formatter={(value: number) => [formatCompactCurrency(value), '']}
+            formatter={(value: any) => [formatCompactCurrency(Number(value)), '']}
           />
           <Legend iconSize={10} wrapperStyle={{ paddingTop: '8px', fontSize: '12px' }} />
           <Bar dataKey="income" name="Income" fill="#10b981" radius={[4, 4, 0, 0]} barSize={28} />

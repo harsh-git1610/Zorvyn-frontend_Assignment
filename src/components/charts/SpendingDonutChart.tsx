@@ -34,7 +34,7 @@ export default function SpendingDonutChart() {
                   ))}
                 </Pie>
                 <Tooltip
-                  formatter={(value: number, name: string) => [formatCurrency(value), name]}
+                  formatter={(value: any, name: any) => [formatCurrency(Number(value)), name]}
                   contentStyle={{
                     backgroundColor: 'var(--color-surface-50, #f8fafc)',
                     border: '1px solid var(--color-surface-200, #e2e8f0)',
